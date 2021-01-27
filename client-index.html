@@ -1,0 +1,403 @@
+cmd<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>UDD | BitHabitat</title>
+<!--meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" /-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="resources/img/sprite-bit-02.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./contents/bootstrap/bootstrap.min.css" />
+	<link rel="stylesheet" href="./css3/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./contents/bootstrap/sidebar/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css" rel="stylesheet" />
+ <!-- Import Assembly -->
+  <link href='https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.min.css' rel='stylesheet'>
+  <script src='https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.js'></script>
+  <!--script src='https://unpkg.com/@turf/turf/turf.min.js'></script-->
+  <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
+  <!--script src="../js/leaflet-snogylop/src/leaflet-snogylop.js"></script-->
+  <script src='https://api.mapbox.com/mapbox.js/plugins/geojson-extent/v0.0.1/geojson-extent.js'></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.0/mapbox-gl-draw.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.0/mapbox-gl-draw.css' type='text/css' />
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css"/>
+<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+<script src='https://npmcdn.com/mapbox-gl-circle/dist/mapbox-gl-circle.min.js'></script>
+<script src="jquery-3.3.1.min.js"></script>
+<script src="html2canvas.js"></script>
+<link rel="stylesheet" href="resources/fonts/apercu/stylesheet.css?v1.1" />
+<link rel="stylesheet" href="resources/fonts/averta/stylesheet.css?v1.1" />
+<link rel="stylesheet" href="main.css?v1.108" />
+
+<style>
+.icon_to_map_cont {bottom:5px;}
+.tomapbox_search, .tomapbox_draw, .mapboxgl-control-container, .last_icons, .last_icons2, .icon_to_map_cont, .mapboxgl-ctrl-top-left  
+	{margin:50px 50px;}
+.last_icons {top:270px;}
+.last_icons a {margin-bottom:5px;}
+.mapboxgl-ctrl-geocoder {/*margin-top:10px;*/}
+.mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-geocoder.active {margin-top:10px!important;}
+.mapboxgl-ctrl-geolocate {/*display:none!important;*/}
+.mapbox-gl-draw_line.active2, .mapbox-gl-draw_line, .mapbox-gl-draw_line.active,
+.mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_line
+ {margin-left:50px!important;margin-right:10px!important;}
+ .mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_point, .mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_polygon, .mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_trash {margin-right:10px!important;}
+.tagcloud, .tagcloud_but, .last_capes, #screensaver_show {margin-right:50px;}
+.tagcloud_but {margin-top:50px;padding-bottom:15px;}
+.tagcloud {margin-top:125px;}
+.last_capes {margin-bottom:50px;}
+#screensaver_show {cursor:pointer;position:absolute;right:290px;bottom:12.5px;font-size:10px;font-weight:800;padding:0px 5px;background:#000;color:#fff;text-align:center;display:inline-block;}
+.mapboxgl-ctrl-group.mapboxgl-ctrl:nth-child(4n) {bottom:117.5px;}
+#grid_for_plus.lateral {
+	left: calc(100% - 330px);
+    margin-top: 100px;
+	}
+#grid_for_plus.lateral .contvh {
+    height: calc(80vh - 120px);
+}
+#grid_for_plus.lateral .contvh {margin-top:-48.5px;}
+#grid_for_plus.lateral .menu_down_foto a.last {margin-top:-45.5px;}
+.contentVideo {padding-top:60vh;padding-bottom:1vh;}
+#make_foto {display:none;}
+.last_capes a {font-size:12px;}
+.para_colors .input_layers {
+    margin-left: 0px;
+    margin-right: 1px;
+}
+.para_colors_x {
+	top: -18px;
+    left: 38px;
+    margin-left: -38px;
+}
+.para_colors_x2 {
+    top: -17px;
+    left: 16px;
+    margin-left: -13px;
+}
+.mapboxgl-popup-content {font-size:14px;}
+.menu_down_foto {height:40px;}
+
+</style>
+
+</head>
+<body>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css" />
+<div id="map"></div>
+<div id="instructions" style="display:none;"></div>
+<div id="instructions" style="display:none;"></div>
+<span id="features_adm_but">+</span>
+<pre id="features_adm" style="display:none;"></pre>
+<span id="features_info_but">+</span>
+<pre id="features_info" style="display:none;"></pre>
+<div id="tagcloud" class="tagcloud" style="display:none;">
+	<div id='para_projectes_cont' class='para_proximitat_cont'>
+		<a href="#" id="mode_projectes" class="subt" style="display:none;"><i class="fa fa-chevron-right"></i> PROJECTES</a>
+		<div id="tots_projectes" style="display:inline-block;">
+			<div id='para_proximitat_cont' class='para_proximitat_cont'>
+				<a href="#" id="mode_circle" class="subt">// CIUTAT PRÒXIMA 1.0 <i class="fa fa-sort-down"></i></a>
+				<div id='para_proximitat' class='para_proximitat' style='display:none;'>
+				<a id="mesinfo_proj0" href="#"> <i class="fa fa-info"></i> </a>
+				<a id="carregarcapes_proj0" href="#">  1. Carregar capes <i id="plus_capes_prox" class="fa fa-plus"></i> </a> 
+				<span id="subtit_proj" class="subtit_proj" style="display:none;">COM ÉS LA NOSTRA CIUTAT? QUI SOM?<br>ON ANEM? COM HI ANEM? COM ESTEM?</span>
+				<div id="para_proximitat_tria" style="display:none;">MINUTS A PEU<br> 
+				<input id="mode_circle_val_2" class="mode_circle_val" value="5" type="number" min="1" max="120" />
+				<input id="mode_circle_val_1" class="mode_circle_val" value="10" type="number" min="1" max="120" />
+				<input id="mode_circle_val" class="mode_circle_val" value="15" type="number" min="1" max="120" /> 
+				</div>
+				<span id="para_proximitat_sub">
+					<a id="activa_prox" class="activa_prox"><i class="fa fa-minus" style="display:none;"></i> 2. Calcula proximitat
+					<span id="first_fes_clic" style="display:none">
+						 <span class="proxi_logo"></span> Fes clic a un punt del mapa</a></span><br>
+						<a id="desactiva_prox" style="display:none;">Sortir mode proximitat</a>
+					<br>
+					<a id="reset_iso20" href="#" style="display:none;"> RESET <i class="fa fa-refresh" style="display:none"></i></a>
+				<span id="menu_proj0"></span>
+				</span>
+				<div id="para_proximitat_opt" class="para_proximitat_opt" style="display:none;">
+					<a id="reset_iso" href="#"> RESET <i class="fa fa-refresh" style="display:none"></i></a>
+					<span id="start_address"></span>
+					<div id="y_apis">
+					</div>
+				</div>
+				</div>
+			</div>
+			<div id='para_bretxa_cont' class='para_proximitat_cont'>
+				<a href="#" id="mode_bretxa" class="subt">// BRETXA DIGITAL 2020 <i class="fa fa-sort-down"></i></a>
+				<div id='para_bretxa' class='para_proximitat' style='display:none;'>
+				<span id="proj1_qq0" class="qq"><i class="fa fa-minus"></i> Connexió a internet a la llar</span>
+					<span id="proj1_qq0_to" class="qq_as" style="display:none;">
+					<a id="PROJ_PLUS_IN_internet-a-la-llar-s" class="para_a active" href="#" onclick="proj_add_new_layer_to_map('internet-a-la-llar-s')"><span id="PROJ_PLUS_IN_a_internet-a-la-llar-s" class="input_layers input_layersPolygon internet-a-la-llar-s active"></span> internet a la llar - sí<span id="PROJ_PLUS_IN_colors-internet-a-la-llar-s" class="para_colors00"></span></a>
+					<a id="PROJ_PLUS_IN_internet-a-la-llar-no" class="para_a active" href="#" onclick="proj_add_new_layer_to_map('internet-a-la-llar-no')"><span id="PROJ_PLUS_IN_a_internet-a-la-llar-no" class="input_layers input_layersPolygon internet-a-la-llar-no active"></span> internet a la llar - no<span id="PROJ_PLUS_IN_colors-internet-a-la-llar-no" class="para_colors00"></span></a>
+					</span>
+				<span id="proj1_qq1" class="qq"><i class="fa fa-minus"></i> Disposen de telèfon intel·ligent</span>
+					<span id="proj1_qq1_to" class="qq_as" style="display:none;">
+					<a id="PROJ_PLUS_IN_amb-smartphone-s" class="para_a active" href="#" onclick="proj_add_new_layer_to_map('amb-smartphone-s')"><span id="PROJ_PLUS_IN_a_amb-smartphone-s" class="input_layers input_layersPolygon amb-smartphone-s active"></span> amb smartphone - sí<span id="PROJ_PLUS_IN_colors-amb-smartphone-s" class="para_colors00"></span></a>
+					<a id="PROJ_PLUS_IN_amb-smartphone-no" class="para_a active" href="#" onclick="proj_add_new_layer_to_map('amb-smartphone-no')"><span id="PROJ_PLUS_IN_a_amb-smartphone-no" class="input_layers input_layersPolygon amb-smartphone-no active"></span> amb smartphone - no<span id="PROJ_PLUS_IN_colors-amb-smartphone-no" class="para_colors00"></span></a>
+					</span>
+				<span id="proj1_qq2" class="qq"><i class="fa fa-minus"></i> No disposen de correu</span>
+					<span id="proj1_qq2_to" class="qq_as" style="display:none;">
+					<a id="PROJ_PLUS_IN_amb-correu-no" class="para_a active" href="#" onclick="proj_add_new_layer_to_map('amb-correu-no')"><span id="PROJ_PLUS_IN_a_amb-correu-no" class="input_layers input_layersPolygon amb-correu-no active"></span> amb correu - no<span id="PROJ_PLUS_IN_colors-amb-correu-no" class="para_colors00"></span></a>
+					</span>
+				<span id="proj1_qq3" class="qq"><i class="fa fa-minus"></i> Han treballat des de casa durant el confinament però tornaran a presencial</span>
+					<span id="proj1_qq3_to" class="qq_as" style="display:none;">
+					<a id="PROJ_PLUS_IN_teletreball-confinament-s" class="para_a active" href="#" onclick="proj_add_new_layer_to_map('teletreball-confinament-s')"><span id="PROJ_PLUS_IN_a_teletreball-confinament-s" class="input_layers input_layersPolygon teletreball-confinament-s active"></span> teletreball confinament - sí<span id="PLUS_IN_colors-teletreball-confinament-s" class="para_colors00"></span></a>
+					</span>
+				<span id="proj1_qq4" class="qq"><i class="fa fa-minus"></i> Quins tipus d’usuaris hi ha a la ciutat?</span>
+					<span id="proj1_qq4_to" class="qq_as" style="display:none;">
+					<a id="PROJ_PLUS_IN_tipus-usuaris" class="para_a active" href="#" onclick="proj_add_new_layer_to_map('tipus-usuaris')"><span id="PROJ_PLUS_IN_a_tipus-usuaris" class="input_layers input_layersPoint tipus-usuaris active"></span> tipus usuaris<span id="PROJ_PLUS_IN_colors-tipus-usuaris" class="para_colors00"></span></a>
+					</span>
+				</div>
+			</div>			
+		</div>
+		<a href="#" id="mode_atles" class="subt" style="display:none;"><i class="fa fa-chevron-right"></i> ATLES UDD</a>
+		<div id="tots_atles" style="display:none;">
+		</div>
+	</div>
+</div>
+<span id="tagcloud_but" class="tagcloud_but"><span id="tittit">URBAN DATA DESK </span> <span id="butbars" class="butbars"></span></span>
+
+
+<div id="grid_waiting_for_foto" class="grid_waiting_for_foto" style="display:none">
+	DESCARREGANT IMATGE<br>ESPERA PER FAVOR<br><br><i class="fa fa-spinner" id='show_grid_waiting_for_foto'></i>
+</div>
+
+<div id="grid_for_foto" class="grid_for_foto" style="display:none">
+	<div class="menu_down_foto"><a class="first" href="#"  id="downMOMENTO"> DESCARREGAR <i class="fa fa-download"></i></a> <a class="last" href="#"  id="show_id_grid_for_foto"> CANCELAR <i class="fa fa-close"></i></a></div>
+	<img src="#" id="theImgCaptCanvas">
+</div>
+
+<div id="grid_for_plus" class="grid_for_foto" style="display:none;">
+	<div class="menu_down_foto"><a class="first" href="#" id="show_id_grid_for_plus" style="display:none;"> CONTROL DE CAPES <i class="fa fa-sliders" style="display:none;"></i></a>  <a class="last" href="#" id="show_id_grid_for_plus2"></a></div>
+		<div class="contvh">
+			<div id="grid_for_plus_cont_tit" class="grid_for_plus_cont_tit">
+				<a href="#" id="show_id_grid_for_plus_cont" class="first toboldsp"> ATLES UDD</a>
+				<div id="grid_for_plus_cont" class="grid_plus_upd_cont para_plus"></div>
+			</div>
+			<div id="grid_for_plus_cont_tit_actives" class="grid_for_plus_cont_tit">
+				<a href="#" id="show_id_grid_for_plus_cont_actives" class="first tobold toboldsp" style="color:#999;"> CAPES EN ÚS</a>
+				<div id="grid_for_plus_cont_actives" class="grid_plus_upd_cont para_plus"></div>
+			</div>
+			<span id="para_proximitat_sub2">
+					<a id="activa_prox2"  class="activa_prox activa_prox2"><i class="fa fa-minus" style="display:none;"></i> 2. Calcula proximitat
+					<span id="first_fes_clic2" style="display:none">
+						<span class="proxi_logo"></span> Fes clic a un punt del mapa</span></a><br>
+						<a id="desactiva_prox2" class="activa_prox2" style="display:none;">Sortir mode proximitat</a>
+					<br>
+					<a id="reset_iso2" href="#" style="display:none;"> RESET <i class="fa fa-refresh" style="display:none"></i></a>
+			</span>
+			<div id="para_plus_ini" class="para_plus">
+				<a id="show_id_select_plus_type" href="#" class="first tobold toboldsp" style="color:#000;"> NOVA CAPA</a> 
+				<a id="para_layers_1" href="#" > Arxiu </a>
+				<a id="para_layers_2" href="#" > Open Data BCN </a>
+				<a id="para_layers_0" href="#" > JSON o GeoJSON</a>
+			</div>
+			<div id="select_plus_type" class="grid_plus_upd para_plus" style="display:none;">
+				<span class="para_input">Títol: </span><input id="tT" type="text"/>
+				<br><span class="para_input">Camps: </span><input id="tAx" type="text"/>
+				<br><span class="para_input">Tipus: </span><select id="tG"><option value="Point" selected>Punt</option><option value="Polygon">Polígon</option><option value="LineString">Línia</option></select></select>
+				<br><span class="para_input">Color: <span class="tobold"></span> </span><input id="tC" type="text" value="#"/>
+				<br><span class="para_inputNO">[OPCIONAL: Regles color: separat per comes: "CAMP,MÀXIM,DIVISIONS", per exemple: "Dones,30000,10" farà que els colors varïin en "10" tonalitas segons el número de "Dones", tenint en compte que el màxim número de "Dones" és "30000", els valors màxims coincidiran amb el color establert]</span>
+				<br>Regles color: <input id="tAR" type="text"/><input id="tAf" type="text" style="display:none;" placeholder="Filtre de dades" />
+				<input id="tAU_base" type="text" style="display:none;" placeholder="Filtre de dades" />
+				<div id="grid_for_plus_upd_self" class="grid_plus_upd para_plus grid_plus_upd2" style="display:inline-block;"><span class="tobold">Arxiu</span><br>
+					<span class="para_input">Fitxer: </span><input id="tAU" type="text" value="url="/>
+<div id="para_upd_file" class="para_upd_file"><label for="fileToUploadG" class="custom-file-upload">
+<h4><i class="fa fa-plus PlusPlus" aria-hidden="true"></i><span class="sel_file">Selecciona un arxiu<br>o arrossega'l aquí<br>.geojson</span></h4></label>
+<input class="input_normal" type="file" name="fileToUploadG[]" id="fileToUploadG" onchange="readURL_area(this);" required multiple="multiple">
+<br><div id="blah_area" style="font-weight:600"></div><br><div id="blah_area_sec" style="display:none;"><a style="color:#000!important;cursor:pointer;" id="id_upd_geo">PUJAR ARXIU </a> <a style="color:#dd2222!important;cursor:pointer;" id="deli_area_blah_area"> CANCELAR</a></div>
+<div id="results_upd_geo"></div></div>
+				</div>
+				<div id="grid_for_plus_upd_open_data_bcn" class="grid_plus_upd para_plus grid_plus_upd2" style="display:none;"><span class="tobold">Open Data BCN</span><br>
+					<span class="para_input">Id_search: </span><input id="tAi" type="text"/>
+					<br><span class="para_input">Limit: </span><input id="tAl" type="text"/>
+				</div>
+				<div id="grid_for_plus_upd_in" class="grid_plus_upd para_plus grid_plus_upd2" style="display:none;">
+					<span class="tobold">JSON o GeoJSON</span><br>
+					Es recomana copiar i enganxar el contingut d'un fitxer GeoJSON, encara que també es pot utilitzar format JSON ämb format {"result":{"records":[{},...,{}]}
+					<br>Exemple format JSON: {"result":{"records":[{"id": 359, "EQUIPAMENT":"Equip A", "latitud": 41.386032,"longitud": 2.153131},...]}}
+					<br>Format GeoJSON: {"type":"FeatureCollection","features":[{"type":"Feature","properties":{...},"geometry":{"type":"Point","coordinates":[[2.15274,41.402501]]}}]}
+					<br>
+					<input id="tAJ" type="text"/>
+				</div>
+				<a id="afegir_capa" class="commit_plus" href="#">AFEGIR CAPA NOVA</a>
+			</div>
+		</div>
+</div>
+
+<div class="last_capes">
+	<div id="menu" style="display:none;">
+	 <div id="menu_layers"></div>
+	 <div id="menu_layers_plus" class="icon_from_map_cont"> Afegir capa <i class="fa fa-plus"></i></div>
+	<div id="icon_from_map_put" class="icon_to_map_cont activa_colors_fons" style="display:none;">Activa colors de fons <i class="fa fa-chevron-right"></i></div>
+	<div id="icon_from_map_put_reset" class="icon_to_map_cont activa_colors_fons" style="display:none;">Desactiva colors de fons <i class="fa fa-chevron-left"></i></div>
+	<div id="icon_from_map_cont" class="icon_from_map_cont" style="display:none;">FONS<br>
+		<span class="icon_from_map-landuse"></span> parcs i zones d'ús<br>
+		<span class="icon_from_map-pedestrian"></span> carrers i zones peatonals<br>
+		<span class="ensenyaments active" style="opacity:0.75;"></span> centres d'ensenyament<br>
+	</div>
+	</div>
+	<a href="#" id="select_capes" class="subt subt0">CAPES ATLES UDD <i class="fa fa-sort-up"></i></a>
+</div>
+
+<div class="last_icons">
+	<a href="#" id="go_inside"></a> <a href="#" id="make_foto"></a> <a id="setUndo" href="#"></a> <a id="setDefaults" href="#"></a>
+</div>
+<div class="last_icons2">
+	<a href="#" id="go_proximitat"></a>
+</div>
+
+<div id="tomapbox_draw" class="tomapbox_draw"></div>
+
+<div id="tomapbox_search" class="tomapbox_search"></div>
+
+<div class="icon_to_map_cont">
+	<span class="icon_to_map_tit" style="display:none;">MAPA TIPUS: </span>
+	<span id="style_dark" class="icon_to_map icon_to_map-dark case_style active"></span> 
+	<span id="style_light" class="icon_to_map icon_to_map-light case_style"></span> 
+	<span id="style_sat" class="icon_to_map icon_to_map-sat case_style"></span> 
+	<!--span id="style_watercolor" class="icon_to_map icon_to_map-watercolor case_style">art</span--> 
+</div>
+
+<div id="home" class="waiting_results grid_waiting_for_foto" style="display:none;"></div>
+<div id="waiting_results" class="waiting_results grid_waiting_for_foto" style="display:none;"><a id="not_show_id_waiting_results" style="position:fixed;top:0px;right:0px;font-size:10px;padding:15px;">x</a>CARREGANT DADES<br><br>Espera si us plau<br><br><i class="fa fa-spinner spinanim"></i></div>
+
+<div id="popup_proj0" class="grid_for_foto grid_for_proj" style="display:none;">
+	<h3 id="not_show_id_popup_proj0_tit" >Ciutat pròxima 1.0</h3>
+	<a id="not_show_id_popup_proj0" class="clo_proj">x</a>
+	<div class="cont_proj">
+		<span class='cre_foo'>Crèdits: <a href="https://cityfov.com/" target="_blank"><strong>City FoV Urban Lab</strong></a> <i class="fa fa-plus"></i> <a href="https://bithabitat.barcelona/" target="_blank"><strong>BitHabitat</strong></a> </span>
+		<br>El projecte <strong>Ciutat pròxima 1.0</strong> intenta explorar el concepte de ciutat a l'abast del ciutadà, una ciutat descentralitzada i enfocada al barri, per tal de potenciar la sostenibilitat, la cohesió social i la convivència.
+		<br><br>Explorant les possibilitats de la idea de proximitat a la ciutat, com la <em>ciutat dels 15 minuts</em> a París o <em>superilles</em> a Barcelona entre d'altres, amb l'objectiu que la vida urbana sigui més agradable, àgil i flexible, proposem una forma de veure la ciutat centrada en el ciutadà/veí i no en els vehicles, una ciutat on les coses poden passar a prop teu, sense la necessitat de fer grans desplaçaments.
+		<br><br>A partir de cinc grans preguntes:
+		<br><i class="fa fa-minus"></i> On vivim?
+		<br><i class="fa fa-minus"></i> Com ens movem?
+		<br><i class="fa fa-minus"></i> Per on ens movem?	
+		<br><i class="fa fa-minus"></i> Com la fem servir?		
+		<br><i class="fa fa-minus"></i> Què podem fer per millorar-la?		
+		<br>Volem que el ciutadà tingui una guia i una eina per a poder tenir respostes i també <em>crear respostes</em>, per tal de que es produeixi una simbiosi entre ciutat i ciutadà -i entre ciutadans-, de forma que la ciutat ens pugui cuidar de la mateixa forma que nosaltres l'hem de cuidar. 
+		<br><br>L'objectiu principal de la <em>ciutat pròxima</em> és poder viure en una ciutat en la que ens agradi viure, tenint en compte que la nostra ciutat comença al nostre barri, i és a dins d'ell on hauríem de ser capaços de viure el dia a dia i poder associar-nos i tenir un espai propi i alhora compartit.
+		<br><br>I amb aquest objectiu disponibilitzem una eina que ens pugui dir la proximitat de les coses que ens interessen i que estiguin al nostre abast. Així, hem creat una forma de navegar per un mapa interactiu en el que podem anar afegint diferents dades d'interès i calcular des de qualsevol punt quina és la nostra ciutat pròxima.
+		<br><br>I per a poder tancar el cercle entre ciutat i cutadà, i que pugui haver una comunicació i reciprocitat entre els dos -i també entre les propis ciutadans-, complementem l'eina de càlculs de proximitat amb una eina per a poder dibuixar i compartir sobre mapa, fomentant així les xarxes properes entre ciutadans que han de revertir-se sobre el propi model de barri. 
+	</div>
+</div>
+
+<div style="display:none" id="custom_style"></div>
+<div style="display:none" id="custom_style_plus"></div>
+
+<style>
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+.contentVideo {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  width: 100%;
+  height:100vh;
+  padding: 40vh 10%;
+  text-align:center;
+  font-size:20px;
+  font-weight:600;
+  line-height:2em;
+}
+
+#myBtnVideo {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: rgba(0,0,0,.5);
+  color: #fff;
+  cursor: pointer;
+  border:1px solid;
+  margin-top:30px;
+}
+#myBtnVideo, #myBtnVideo a {
+	display:inline-block;text-align:center;
+}
+#myBtnVideo:hover, screensaver_show:hover {
+  background: #fff;
+  color: #000;
+  transition: 0.25s linear all;
+}
+#screensaver {position:fixed;top:0;left:0;width:100%;height:100vh;display:inline-block;margin:0;padding:0;z-index:999;background:#000;}
+.titscreen {font-size:34px;font-weight:800!important;background: rgba(0,0,0,.5);width:auto;display:inline-block;}
+.imtitleft {position:fixed;left:5%;bottom:10vh;height:80px;}
+.imtitright {position:fixed;right:5%;bottom:10vh;height:80px;}
+#screensaver_show {cursor:pointer;position:fixed;right:290px;bottom:62.5px;font-size:10px;font-weight:800;padding:0px 5px;background:#000;color:#fff;text-align:center;display:inline-block;}
+.contentVideo {padding-top:60vh;padding-bottom:1vh;}
+.imtitleft {
+    position: fixed;
+	right:unset;
+	bottom:unset;
+    left: 25%;
+    top: 10vh;
+    height: 60px;
+}
+.imtitright {
+    position: fixed;
+	left:unset;
+	bottom:unset;
+    right: 25%;
+    top: 10vh;
+    height: 60px;
+}
+</style>
+<div id="screensaver">
+<video autoplay muted loop id="myVideo">
+  <source src="resources/screensaver/screensaver_udd_1350.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+<div class="contentVideo">
+  <h1 class="titscreen">URBAN DATA DESK</h1>
+  <p>Fes clic per activar la visualització<br></p>
+  <button id="myBtnVideo" style="display:none;">Navega per l'UDD</button>
+  <img src="resources/img/BITHABITAT.png" class='imtitleft'>
+  <img src="resources/img/ajuntament-barcelona_white.png" class='imtitright'>
+</div>
+</div>
+<span id="screensaver_show">About</span>
+
+
+<script>
+window.$ = window.jQuery = require('jquery');
+     module.id = '.';
+      module.path = '.';
+//require('./client-ipc.js');
+//require('./functions.js');
+//require('./vars_options.js');
+//require('./vars.js');
+//require('./vars_options_layers.js');
+require('./client-app.js');
+</script>
+<!--script src="client-ipc.js"></script>
+<script src="functions.js"></script>
+<script src="vars_options.js"></script>
+<script src="vars.js"></script>
+<script src="vars_options_layers.js"></script>
+<script src="client-app.js"></script-->
+ 
+</body>
+</html>
+
+
+<script>
+  /*if(!IS_DEV) {
+    var tag = document.createElement('meta');
+    tag.setAttribute("http-equiv", "Content-Security-Policy");
+    tag.setAttribute("content", "default-src 'self'; style-src 'self' 'unsafe-inline';")
+    document.head.appendChild(tag)
+  }*/
+</script>

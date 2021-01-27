@@ -1,0 +1,54 @@
+{
+	"type" : "FeatureCollection",
+	"name" : "Ampliacio_Voreres",
+	"features" : [
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "LineString",
+				"coordinates" : [
+					[ 2.1729047734, 41.3883098056 ],
+					[ 2.1820098598, 41.3815010592 ]
+				]
+			},
+			"properties" : {
+				"CODI_CAPA" : "K036",
+				"CODI_SUBCAPA" : "K06",
+				"ID" : "GL430623",
+				"TOOLTIP" : "AmpliaciÃ³ de voreres "
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "LineString",
+				"coordinates" : [
+					[ 2.1648967414, 41.3858447161 ],
+					[ 2.1698426607, 41.3854782031 ]
+				]
+			},
+			"properties" : {
+				"CODI_CAPA" : "K036",
+				"CODI_SUBCAPA" : "K06",
+				"ID" : "GL430624",
+				"TOOLTIP" : "AmpliaciÃ³ de voreres "
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "LineString",
+				"coordinates" : [
+					[ 2.164748186, 41.3859930905 ],
+					[ 2.1698858917, 41.3879177491 ]
+				]
+			},
+			"properties" : {
+				"CODI_CAPA" : "K036",
+				"CODI_SUBCAPA" : "K06",
+				"ID" : "GL430625",
+				"TOOLTIP" : "AmpliaciÃ³ de voreres "
+			}
+		}
+	]
+}

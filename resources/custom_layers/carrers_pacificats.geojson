@@ -1,0 +1,54 @@
+{
+	"type" : "FeatureCollection",
+	"name" : "Carrers_Pacificats_GeoJson",
+	"features" : [
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "LineString",
+				"coordinates" : [
+					[ 2.1495036572, 41.3822182739 ],
+					[ 2.1542043398, 41.3786061663 ]
+				]
+			},
+			"properties" : {
+				"CODI_CAPA" : "K035",
+				"CODI_SUBCAPA" : "K06",
+				"ID" : "GL430620",
+				"TOOLTIP" : "Carrers pacificats "
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "LineString",
+				"coordinates" : [
+					[ 2.1516879457, 41.3805349323 ],
+					[ 2.1709181968, 41.395014278 ]
+				]
+			},
+			"properties" : {
+				"CODI_CAPA" : "K035",
+				"CODI_SUBCAPA" : "K06",
+				"ID" : "GL430621",
+				"TOOLTIP" : "Carrers pacificats "
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "LineString",
+				"coordinates" : [
+					[ 2.1734820601, 41.3930500195 ],
+					[ 2.1665029493, 41.3983458764 ]
+				]
+			},
+			"properties" : {
+				"CODI_CAPA" : "K035",
+				"CODI_SUBCAPA" : "K06",
+				"ID" : "GL430622",
+				"TOOLTIP" : "Carrers pacificats "
+			}
+		}
+	]
+}
